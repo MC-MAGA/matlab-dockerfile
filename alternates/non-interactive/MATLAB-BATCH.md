@@ -151,6 +151,12 @@ For support, contact [MathWorks Technical Support](https://www.mathworks.com/sup
 
 ## Changelog
 
+### v2026.02.1
+- **Added:** Internal changes to support new token formats.
+
+### v2026.02.0
+- **Fixed:** Issues with invalid folder names.
+
 ### v2025.11.1
 - **Fixed:** Compatibility with MATLAB R2026a Prerelease after recent updates.
 
@@ -222,4 +228,4 @@ For support, contact [MathWorks Technical Support](https://www.mathworks.com/sup
 - **Added:** Support for MATLAB R2020b to R2023a.
 
 ---
-Copyright 2024-2025 The MathWorks, Inc.
+Copyright 2024-2026 The MathWorks, Inc.
