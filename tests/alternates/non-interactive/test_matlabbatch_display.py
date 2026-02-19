@@ -1,4 +1,4 @@
-# Copyright 2024 The MathWorks, Inc.
+# Copyright 2024-2026 The MathWorks, Inc.
 
 """
 Test class to validate the non-interactive dockerfile.
@@ -40,7 +40,7 @@ class TestMATLABBatchDisplay(unittest.TestCase):
         runDisplayTest will run some example tests that require a display.
         This is equivalent to running
 
-        docker run --init -it --rm -e MLM_LICENSE_TOKEN=... non-interactive:r2024a matlab-batch runDisplayTest
+        docker run -it --rm -e MLM_LICENSE_TOKEN=... non-interactive:r2024a matlab-batch runDisplayTest
         """
         cmd = "matlab-batch runDisplayTest"
         mtest_file_name = "runDisplayTest.m"
@@ -56,7 +56,6 @@ class TestMATLABBatchDisplay(unittest.TestCase):
 
         self.container = self.client.containers.run(
             image=self.image_name,
-            init=True,
             detach=True,
             stdin_open=True,
             environment={"MLM_LICENSE_TOKEN": os.getenv("BATCH_TOKEN")},

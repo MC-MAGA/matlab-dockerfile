@@ -1,4 +1,4 @@
-# Copyright 2024-2025 The MathWorks, Inc.
+# Copyright 2024-2026 The MathWorks, Inc.
 # This Dockerfile allows you to build a Docker® image with MATLAB® installed using the MATLAB Package
 # Manager and licensed using MATLAB Batch Licensing. Use the optional build arguments to customize the
 # version of MATLAB, list of products to install, and the location at which to install MATLAB.
@@ -28,13 +28,14 @@ ARG MATLAB_RELEASE
 ARG MATLAB_PRODUCT_LIST
 ARG MATLAB_INSTALL_LOCATION
 
-# Install mpm dependencies.
+# Install mpm dependencies along with those required to run matlab-batch within the container.
 RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get update \
     && apt-get install --no-install-recommends --yes \
     wget \
     ca-certificates \
     xvfb \
+    tini \
     && apt-get clean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/*
@@ -74,5 +75,5 @@ RUN wget -q 'https://raw.githubusercontent.com/mathworks-ref-arch/matlab-dockerf
 # https://github.com/mathworks-ref-arch/matlab-dockerfile#help-make-matlab-even-better
 ENV MW_DDUX_FORCE_ENABLE=true MW_CONTEXT_TAGS=MATLAB:BATCHLICENSING:DOCKERFILE:V1
 
-ENTRYPOINT ["xvfb-run"]
+ENTRYPOINT ["tini", "--", "xvfb-run"]
 CMD ["/bin/bash"]

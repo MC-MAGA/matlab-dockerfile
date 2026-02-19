@@ -28,10 +28,10 @@ Build a container with a name and tag.
 docker build -t matlab-non-interactive:R2025b .
 ```
 
-You can then run the container and use the `matlab-batch` command. Test the container by running an example MATLAB command, such as `rand`. Use the --init flag in the docker run command to ensure that the container stops gracefully when a docker stop or docker kill command is issued.
+You can then run the container and use the `matlab-batch` command. Test the container by running an example MATLAB command, such as `rand`.
 
 ```bash
-docker run --init --rm matlab-non-interactive:R2025b matlab-batch -licenseToken "user@email.com::encodedToken" "rand"
+docker run --rm matlab-non-interactive:R2025b matlab-batch -licenseToken "user@email.com::encodedToken" "rand"
 ```
 For more information, see [Run the Container](#run-the-container).
 
@@ -86,14 +86,14 @@ With the `docker run` command, use one of these options.
 - Specify the `-licenseToken` run-arg.
     ```bash
     # Example
-    docker run --init --rm matlab-non-interactive:R2025b matlab-batch -licenseToken "user@email.com::encodedToken" "disp('Hello, World.')"
+    docker run --rm matlab-non-interactive:R2025b matlab-batch -licenseToken "user@email.com::encodedToken" "disp('Hello, World.')"
     ```
 
 - Specify the `MLM_LICENSE_TOKEN` environment variable.
     ```bash
     # Example
     export MLM_LICENSE_TOKEN="user@email.com::encodedToken"
-    docker run --init --rm -e MLM_LICENSE_TOKEN matlab-non-interactive:R2025b matlab-batch "disp('Hello, World.')"
+    docker run --rm -e MLM_LICENSE_TOKEN matlab-non-interactive:R2025b matlab-batch "disp('Hello, World.')"
     ```
 
 ## Run the Container
@@ -101,7 +101,7 @@ This Dockerfile's default entry-point is a shell session. After you start the co
 
 ```bash
 # Launch MATLAB, print Hello, World., and exit:
-docker run --init --rm matlab-non-interactive:R2025b matlab-batch -licenseToken "user@email.com::encodedToken" "disp('Hello, World.')"
+docker run --rm matlab-non-interactive:R2025b matlab-batch -licenseToken "user@email.com::encodedToken" "disp('Hello, World.')"
 ```
 
 You can set your MATLAB batch licensing token at the container level by setting the `MLM_LICENSE_TOKEN` environment variable, as shown in the examples below.
@@ -111,7 +111,7 @@ To start the container, run a MATLAB command and exit, use this command.
 ```bash
 # Container runs the command RAND in MATLAB and exits.
 export MLM_LICENSE_TOKEN="user@email.com::encodedToken"
-docker run --init --rm -e MLM_LICENSE_TOKEN matlab-non-interactive:R2025b matlab-batch rand
+docker run --rm -e MLM_LICENSE_TOKEN matlab-non-interactive:R2025b matlab-batch rand
 ```
 
 ### Run a MATLAB script
@@ -119,7 +119,7 @@ To start the container, run a MATLAB script and exit, use this command.
 ```bash
 # Container runs the script myscript.m in MATLAB and exits.
 export MLM_LICENSE_TOKEN="user@email.com::encodedToken"
-docker run --init --rm -v $(pwd):/content -w /content -e MLM_LICENSE_TOKEN matlab-non-interactive:R2025b matlab-batch "myscript"
+docker run --rm -v $(pwd):/content -w /content -e MLM_LICENSE_TOKEN matlab-non-interactive:R2025b matlab-batch "myscript"
 ```
 
 ## More MATLAB Docker Resources
@@ -137,4 +137,4 @@ To learn more, see the documentation: [Help Make MATLAB Even Better - Frequently
 We encourage you to try this repository with your environment and provide feedback. If you encounter a technical issue or have an enhancement request, create an issue [here](https://github.com/mathworks-ref-arch/matlab-dockerfile/issues).
 
 ---
-Copyright 2024-2025 The MathWorks, Inc.
+Copyright 2024-2026 The MathWorks, Inc.
